@@ -60,6 +60,7 @@ export default function UserProfileModal({
   }, [user]);
 
   const handleApprovalAction = async (action: 'approve' | 'reject' | 'reset') => {
+    if (!user) return;
     try {
       await fetch('/api/admin/users/approve', {
         method: 'POST',
