@@ -105,7 +105,7 @@ export async function runUserApprovalTests(): Promise<{ passed: number; failed: 
   assert(rejectRes.status === 200 && rejectJson.success === true, 'POST reject returns status 200');
   assert(rejectJson.approvalStatus === 'rejected', 'Response returns approvalStatus: rejected');
   assert(approvedInStore?.approval_status === 'rejected', 'User profile in mockStore is updated to rejected');
-  assert(approvedInStore?.approval_notes?.includes('Nomor WhatsApp'), 'Rejection notes are stored');
+  assert(Boolean(approvedInStore?.approval_notes?.includes('Nomor WhatsApp')), 'Rejection notes are stored');
   assert(mockStore.auditLogs[0].action === 'user_approval_rejected', 'Audit log records user_approval_rejected');
 
   // 6. Admin Salwa L resets a user back to pending (action: 'reset')
